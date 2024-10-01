@@ -1,6 +1,6 @@
-import { getUser } from "../../../lib/data";
+import { getUserMongo } from "../../lib/data";
 import styles from "./postuser.module.css"
-
+import Image from 'next/image';
 // const getUser = async (userid)=>{
 //     const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userid}`, {cache:"no-store"});
   
@@ -16,12 +16,18 @@ const PostUser = async ({userID}) => {
     // const user = await getUser(userID);
     // console.log(user)
     // console.log(userID)
-    const user = await getUser(userID);
-    // console.log(userID)
+    const user = await getUserMongo(userID);
+    console.log(user)
     return (
     <div className={styles.container}>
-        <span className={styles.title}>Author</span>
-        <span className={styles.username}>{user.name}</span>
+
+     
+        <Image className={styles.avatar}  src={user.img ? user.img : "/noavater.png"} alt=""  width={50}  height={50} />
+ 
+        <div className={styles.texts}>
+            <span className={styles.title}>Author</span>
+            <span className={styles.username}>{user.username}</span>
+        </div>
     </div>
     )
   };

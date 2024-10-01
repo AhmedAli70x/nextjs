@@ -1,9 +1,7 @@
-// import { Post, User } from "./models";
-// import { connectToDb } from "./utils";
-// import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore } from "next/cache";
 import { Post, User } from "./models";
 import { connectToDb } from "./utils"
-import { unstable_noStore as noStore } from "next/cache";
+ 
 // TEMPORARY DATA
 // const users = [
 //   { id: 1, name: "John" },
@@ -34,7 +32,7 @@ export const getPosts = async () => {
 export const getPost = async (slug) => {
   try{
     connectToDb();
-    const post = await Post.find({slug: slug});
+    const post = await Post.findOne({slug: slug});
     return post; 
   }catch(err){
     console.log(err)
@@ -42,16 +40,19 @@ export const getPost = async (slug) => {
   }
 };
 
-export const getUser = async (id) => {
-  try{
+export const getUserMongo = async (id) => {
+  noStore();
+  try {
     connectToDb();
-    const User = await User.findById(id);
-    return User; 
-  }catch(err){
-    console.log(err)
-    throw new Error("Failed to fetch user!")
+    const user = await User.findById(id);
+    console.log(user)
+    return user;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch user!");
   }
 };
+
 export const getUsers = async () => {
   try{
     connectToDb();
