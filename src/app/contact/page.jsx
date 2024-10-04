@@ -6,7 +6,10 @@ import Image from 'next/image';
 //import HydratioTest from '@/components/hydrationTest'
 
 // const HydratioTestNoSSR = dynamic(()=> import("@/components/hydrationTest"), {ssr:false})
-
+export const metadata = {
+  title: 'Contact Page ',
+  description: 'Contact Description',
+}
 const ContactPage = () => {
 
 

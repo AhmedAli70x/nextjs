@@ -5,15 +5,25 @@ import PostUser from '@/components/postUser/porstuser';
 import { Suspense } from 'react';
 import { getPost } from '../../../lib/data';
 
-// const getData = async (slug)=>{
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`, {cache:"no-store"});
+const getData = async (slug)=>{
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {cache:"no-store"});
 
-//   if(!res.ok){
-//     throw new Error("Something went wrong");
-//   }
+  if(!res.ok){
+    throw new Error("Something went wrong");
+  }
 
-//   else return res.json();
-// };
+  else return res.json();
+};
+
+export const generateMetadata = async({params})=>{
+  const {slug} = params;
+  const post = await getData(slug);
+
+  return{
+    title: post.title,
+    description: post.desc
+  }
+}
 
 const SingleHomePage = async ({params}) => {
 
