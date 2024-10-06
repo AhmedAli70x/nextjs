@@ -21,11 +21,7 @@ export const metadata = {
 const BlogPage =  async() => {
 
   // using API
-    const posts = await  getData()
-
-    //withou an API
-    // const posts = await getPosts();
-    
+    const posts = await  getData()    
     return (
       <div className={styles.container}>
         {posts.map(post=>(

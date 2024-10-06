@@ -4,9 +4,10 @@ import Image from 'next/image';
 import PostUser from '@/components/postUser/porstuser';
 import { Suspense } from 'react';
 import { getPost } from '../../../lib/data';
+import { get } from 'mongoose';
 
 const getData = async (slug)=>{
-  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {cache:"no-store"});
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {method: "GET"});
 
   if(!res.ok){
     throw new Error("Something went wrong");
@@ -36,7 +37,7 @@ const SingleHomePage = async ({params}) => {
   //get post without API
   const post = await getPost(slug);
   let date = post;
-  console.log(date)
+  // console.log(date)
     return (
     <div className={styles.container}>
     {post.img &&    <div className={styles.imgContainer}>

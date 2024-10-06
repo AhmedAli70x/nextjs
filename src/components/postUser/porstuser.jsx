@@ -12,10 +12,7 @@ import Image from 'next/image';
 //   };
 
 const PostUser = async ({userID}) => {
-    //using Api
-    // const user = await getUser(userID);
-    // console.log(user)
-    // console.log(userID)
+
     const user = await getUserMongo(userID);
     console.log(user)
     return (
